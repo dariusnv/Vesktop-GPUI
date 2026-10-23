@@ -1,0 +1,31 @@
+name: Native GPUI
+on:
+    push:
+        branches: [main]
+        paths: ['native/**', '.github/workflows/native.yml']
+    pull_request:
+        paths: ['native/**', '.github/workflows/native.yml']
+permissions:
+    contents: read
+concurrency:
+    group: native-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
+jobs:
+    windows:
+        runs-on: windows-latest
+        defaults:
+            run:
+                working-directory: native
+                shell: pwsh
+        steps:
+            - uses: actions/checkout@v7
+            - name: Install stable Rust
+              run: rustup update stable --no-self-update
+            - name: Format
+              run: cargo +stable fmt --all -- --check
+            - name: Lint
+              run: cargo +stable clippy --locked --workspace --all-targets -- -D warnings
+            - name: Test
+              run: cargo +stable test --locked --workspace
+            - name: Build portable release
+              run: ./scripts/build.ps1
