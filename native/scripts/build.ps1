@@ -27,6 +27,12 @@ try {
     foreach ($file in @('README.md', 'NOTICE', 'GPUI-INPUT-LICENSE')) {
         Copy-Item -LiteralPath (Join-Path $nativeRoot $file) -Destination $distribution -Force
     }
+    $distributionDocs = Join-Path $distribution 'docs'
+    New-Item -ItemType Directory -Force -Path $distributionDocs | Out-Null
+    Get-ChildItem -LiteralPath (Join-Path $nativeRoot 'docs') -File | ForEach-Object {
+        Copy-Item -LiteralPath $_.FullName -Destination $distributionDocs -Force
+    }
+    Set-Content -LiteralPath (Join-Path $distribution 'SOURCE.txt') -Value 'Corresponding source: https://github.com/dariusnv/Vesktop-GPUI/tree/native-gpui/native'
     Write-Output "Portable build: $distribution"
     if ($Run) { & (Join-Path $distribution 'vesktop-gpui.exe') }
 } finally {
