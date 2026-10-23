@@ -1,0 +1,8 @@
+Vesktop Native retains the Vencord/Vesktop GPL-3.0-or-later license.
+
+crates/app/src/input.rs is adapted from the GPUI 0.2.2 examples/input.rs
+published by Zed Industries, licensed under Apache License 2.0.
+https://github.com/zed-industries/zed/tree/main/crates/gpui
+Changes include Windows key bindings, input events, composition-range repair,
+horizontal scrolling, clipping and application-specific styling.
+The Apache License is included as GPUI-INPUT-LICENSE.

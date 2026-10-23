@@ -1,5 +1,10 @@
 # Vesktop
 
+> **GPUI / Rust fork:** the Windows native prototype is in [`native/`](native/README.md).
+> It runs without Electron or a webview. It is an offline sandbox with an optional
+> Discord bot developer mode; it is not yet a personal-account Discord replacement.
+> The original upstream Electron application remains below.
+
 Vesktop is a custom Discord desktop app
 
 **Main features**:
